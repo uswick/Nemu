@@ -31,9 +31,10 @@ typedef enum {
 typedef int (*i_executor)(void *runtime, void *op1, void *op2, void *op3);
 
 /*
- * A type describing each intruction
+ * A type describing each intruction in 6502 microprocessor
  * */
 typedef struct {
+  const char* name; // name for the instruction
   int size;         // instruction size in bytes = opcode + operand/s
   addr_mode_t mode; // addressing mode
   int cycles;       // execution cpu cycles
