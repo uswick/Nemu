@@ -1,9 +1,9 @@
 #ifndef _CPU_H_
 #define _CPU_H_
 #include <stdlib.h>
-#include "runtime.h"
+#include <runtime.h>
 
-typedef struct {
+typedef struct cpu {
   uint16_t PC; // program counter - 16bit address
   uint8_t SP;  // stack pointer - 8bit
   uint8_t A;   // Accumilator - 8bit
@@ -25,16 +25,17 @@ typedef enum {
   XIndirect,
   YIndirect,
   IndirectX,
-  IndirectY
+  IndirectY,
+  NoAddr
 } addr_mode_t;
 
-typedef int (*i_executor)(void *runtime, void *op1, void *op2, void *op3);
+typedef int (*i_executor)(void *runtime, n_addr op1, n_addr op2);
 
 /*
  * A type describing each intruction in 6502 microprocessor
  * */
 typedef struct {
-  const char* name; // name for the instruction
+  const char *name; // name for the instruction
   int size;         // instruction size in bytes = opcode + operand/s
   addr_mode_t mode; // addressing mode
   int cycles;       // execution cpu cycles
